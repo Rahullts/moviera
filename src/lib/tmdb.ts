@@ -1,5 +1,5 @@
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
-const BASE = 'https://api.themoviedb.org/3';
+const BASE = '/api/tmdb';
 const IMG = 'https://image.tmdb.org/t/p';
 
 const SI_LANGS = ['ta', 'te', 'ml', 'kn'];
