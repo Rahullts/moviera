@@ -1,5 +1,5 @@
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
-const BASE = '/api/tmdb';
+const BASE = 'https://api.themoviedb.org/3';
 const IMG = 'https://image.tmdb.org/t/p';
 
 const SI_LANGS = ['ta', 'te', 'ml', 'kn'];
@@ -12,12 +12,13 @@ const TMDB_AVAILABLE = !!API_KEY;
 
 async function tmdbFetch(endpoint: string, params: Record<string, string | number | boolean> = {}): Promise<any> {
   if (!TMDB_AVAILABLE) throw new Error('TMDB API key not configured');
-  const url = new URL(`${BASE}${endpoint}`);
-  url.searchParams.set('api_key', API_KEY);
+  const searchParams = new URLSearchParams();
+  searchParams.set('path', endpoint.replace(/^\//, ''));
+  searchParams.set('api_key', API_KEY);
   for (const [k, v] of Object.entries(params)) {
-    if (v !== undefined && v !== null) url.searchParams.set(k, String(v));
+    if (v !== undefined && v !== null) searchParams.set(k, String(v));
   }
-  const res = await fetch(url.toString());
+  const res = await fetch(`/api/tmdb?${searchParams.toString()}`);
   if (!res.ok) throw new Error(`TMDB ${res.status}: ${res.statusText}`);
   return res.json();
 }
