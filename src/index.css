@@ -1,0 +1,266 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700;900&family=Barlow+Condensed:wght@600;700;900&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg:           #0F0F0F;
+  --surface:      #151515;
+  --card:         #1A1A1A;
+  --card2:        #242424;
+  --elevated:     #2C2C2C;
+  --border:       rgba(255,255,255,0.08);
+  --border2:      rgba(255,255,255,0.14);
+  --text:         #FFFFFF;
+  --text2:        #A8A8A8;
+  --text3:        #666666;
+  --accent:       #F5C518;
+  --accent2:      #D4A017;
+  --accent-glow:  rgba(245,197,24,0.12);
+  --gold:         #F5C518;
+  --gold-light:   #FFD84D;
+  --gold-dim:     #7A6010;
+  --gold-glow:    rgba(245,197,24,0.08);
+  --border-gold:  rgba(245,197,24,0.25);
+  --tamil:        #FF6B35;
+  --telugu:       #4ECDC4;
+  --malayalam:    #21D07A;
+  --kannada:      #F7DC6F;
+  --lb-orange:    #FF8000;
+  --success:      #21D07A;
+  --error:        #E50914;
+  --info:         #1E90FF;
+  --tv-purple:    #A855F7;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Barlow', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+}
+
+h1, h2, h3, .font-display {
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 0.05em;
+}
+
+.font-condensed, .tag, .badge-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.font-mono, .font-data {
+  font-family: 'DM Mono', monospace;
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--surface); }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent2); }
+
+@layer components {
+  .btn-gold {
+    @apply px-5 py-2.5 rounded-lg font-medium text-sm transition-all duration-200;
+    background: linear-gradient(135deg, var(--gold), var(--accent2));
+    color: var(--bg);
+  }
+  .btn-gold:hover {
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    transform: translateY(-1px);
+    box-shadow: 0 4px 24px rgba(232, 184, 75, 0.35);
+  }
+  .btn-gold:active { transform: translateY(0); }
+  .btn-gold:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .btn-outline {
+    @apply px-5 py-2.5 rounded-lg font-medium text-sm transition-all duration-200 border;
+    border-color: var(--border2);
+    color: var(--text2);
+    background: transparent;
+  }
+  .btn-outline:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: var(--gold-glow);
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+
+  .section-header {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.06em;
+    color: var(--text);
+  }
+
+  .lang-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid var(--card);
+  }
+
+  .movie-scroll {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 4px 0 12px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .movie-scroll::-webkit-scrollbar { display: none; }
+
+  .fade-in {
+    animation: fadeIn 0.4s ease-out;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .skeleton {
+    background: linear-gradient(90deg, var(--card2) 25%, var(--elevated) 50%, var(--card2) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 8px;
+  }
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  .form-label {
+    display: block;
+    font-size: 12px;
+    color: var(--text3);
+    margin-bottom: 6px;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 11px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border2);
+    background: var(--card2);
+    color: var(--text);
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px;
+    margin-bottom: 16px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+  }
+  .form-input::placeholder {
+    color: var(--text3);
+  }
+}
+
+/* Desktop movie card width */
+.movie-card { flex-shrink: 0; width: 175px; cursor: pointer; }
+
+/* Desktop hero */
+.hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 85vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Logo gradient using gold */
+.logo {
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Gold accent on active nav */
+.nav-link.active { color: var(--gold) !important; }
+.nav-link.active::after { background: var(--gold) !important; }
+
+/* Production team grid */
+.crew-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+  margin-bottom: 2rem;
+}
+.crew-card {
+  background: var(--card2);
+  border: 0.5px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.crew-role {
+  font-size: 10px;
+  color: var(--text3);
+  font-family: 'DM Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 3px;
+}
+.crew-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  font-family: 'Barlow', sans-serif;
+}
+
+/* Calendar date badge */
+.cal-date-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  color: var(--text);
+  line-height: 1;
+}
+.cal-date-mon {
+  font-size: 9px;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-family: 'DM Mono', monospace;
+}
+
+/* Desktop overrides */
+@media (min-width: 1024px) {
+  .movie-card { width: 190px; }
+  .scroll-row { gap: 18px; }
+  .container { max-width: 1440px; }
+  .hero { min-height: 92vh; }
+  .hero h1 { font-size: 5rem; }
+  .hero p { font-size: 1.1rem; max-width: 520px; }
+  .hero-content { max-width: 650px; }
+  .detail-grid { grid-template-columns: 250px 1fr; gap: 3rem; }
+  .detail-poster { margin-top: -120px; }
+  .detail-title { font-size: 3rem; }
+}
+
+/* Auth page mobile */
+@media (max-width: 768px) {
+  .auth-page { grid-template-columns: 1fr !important; }
+  .auth-left { display: none !important; }
+}
